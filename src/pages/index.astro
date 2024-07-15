@@ -1,0 +1,104 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Badge from "../components/Badge.astro";
+import GitHubIcon from "../components/icons/GitHub.astro";
+import LinkedInIcon from "../components/icons/LinkedIn.astro";
+import SocialPil from "../components/SocialPil.astro";
+import MailIcon from "../components/icons/Mail.astro";
+import Code from "../components/icons/Code.astro";
+import Projects from "../components/Projects.astro";
+import ProfileImage from "../components/ProfileImage.astro";
+import SkillIcon from "../components/icons/Skills.astro";
+import Instagram from "../components/icons/Instagram.astro";
+import { skills } from "../data/skills";
+import Skill from "../components/Skill.astro";
+import WhatsApp from "../components/icons/WhatsApp.astro";
+---
+
+<Layout>
+  <main class="max-w-3xl px-6 py-40 flex flex-col gap-10">
+    <section>
+      <div class="flex gap-x-6 gap-y-4 items-center max-md:flex-col pb-6">
+        <ProfileImage size="large" />
+
+        <h1
+          class="text-white text-4xl md:text-4xl lg:text-5xl font-bold flex items-center gap-x-4 opacity-95"
+        >
+          Hey, soy Daniel Zhu
+          <a
+            href="https://linkedin.com/in/daniel-zhu-645ba72b8"
+            target="_blank"
+            rel="noopener"
+            class="flex justify-center items-center"
+          >
+            <Badge>Disponible</Badge>
+          </a>
+        </h1>
+      </div>
+
+      <h2 class="text-xl lg:text-2xl text-wrap max-w-[700px]">
+        <span>+2 años en el mundo del desarrollo.</span>
+        <span class="text-blue-300/90">
+          Estudiante de Ingenería en Software.</span
+        >
+        <span class="text-yellow-100/90"> Desde Ambato, Ecuador 🇪🇨. </span>
+        <span class="opacity-75">
+          Enfocado en crear soluciónes informáticas.
+        </span>
+      </h2>
+    </section>
+
+    <nav class="flex gap-2 flex-wrap">
+      <SocialPil href="https://linkedin.com/in/daniel-zhu-645ba72b8">
+        <LinkedInIcon class="size-5 md:size-6" />
+        LinkedIn
+      </SocialPil>
+
+      <SocialPil href="https://github.com/Chu2409">
+        <GitHubIcon class="size-5 md:size-6" />
+        GitHub
+      </SocialPil>
+
+      <SocialPil href="https://www.instagram.com/chu_er_/">
+        <Instagram class="size-5 md:size-6" />
+        Instagram
+      </SocialPil>
+
+      <SocialPil
+        href="https://api.whatsapp.com/send/?phone=0967229875&text=Hola Daniel, me gustaría trabajar contigo"
+      >
+        <WhatsApp class="size-6 md:size-7" />
+        WhatsApp
+      </SocialPil>
+
+      <SocialPil href="mailto:dzhu2409@gmail.com">
+        <MailIcon class="size-5 md:size-6" />
+        dzhu2409@gmail.com
+      </SocialPil>
+    </nav>
+
+    <section class="pt-9">
+      <h2
+        class="text-2xl font-semibold mb-6 flex gap-x-3 items-center opacity-95"
+      >
+        <SkillIcon class="size-7" />
+        Habilidades
+      </h2>
+
+      <div class="grid xl:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-2">
+        {skills.map((skill) => <Skill title={skill.title} icon={skill.icon} />)}
+      </div>
+    </section>
+
+    <section class="pt-9">
+      <h2
+        class="text-2xl font-semibold mb-6 flex gap-x-3 items-center opacity-95"
+      >
+        <Code class="size-7" />
+        Proyectos
+      </h2>
+
+      <Projects />
+    </section>
+  </main>
+</Layout>
