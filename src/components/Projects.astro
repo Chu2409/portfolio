@@ -4,6 +4,8 @@ import NextJS from "./icons/NextJS.astro";
 import Tailwind from "./icons/Tailwind.astro";
 import Link from "./icons/Link.astro";
 import LinkButton from "./LinkButton.astro";
+import Spring from "./icons/Spring.astro";
+import Java from "./icons/Java.astro";
 
 const TAGS = {
   NEXT: {
@@ -15,6 +17,16 @@ const TAGS = {
     name: "Tailwind CSS",
     class: "bg-[#003159] text-white",
     icon: Tailwind,
+  },
+  SPRING: {
+    name: "Spring Boot",
+    class: "bg-[#6DB33F] text-white",
+    icon: Spring,
+  },
+  JAVA: {
+    name: "Java",
+    class: "bg-[#191a19] text-white",
+    icon: Java,
   },
 };
 
@@ -36,6 +48,13 @@ const PROJECTS = [
     image: "/projects/im.webp",
     gihub: null,
     tags: [TAGS.NEXT, TAGS.TAILWIND],
+  },
+  {
+    title: "SRI Invoicer API - API de Facturación SRI",
+    description:
+      "Sistema de facturación electrónica para Ecuador, que permite la generación de comprobantes electrónicos y su envío al SRI. Creado con Spring Boot, Java, PostgreSQL y gestionando los servicios web del SRI.",
+    image: "/projects/invoicer.webp",
+    tags: [TAGS.JAVA, TAGS.SPRING],
   },
 ];
 ---
