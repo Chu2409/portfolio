@@ -45,7 +45,7 @@ export const skills: SkillType[] = [
     icon: "https://s2.svgbox.net/files.svg?ic=pgsql",
   },
   {
-    title: "Postgres",
+    title: "MySQL",
     icon: "https://s2.svgbox.net/files.svg?ic=mysql",
   },
   {
