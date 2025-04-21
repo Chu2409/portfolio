@@ -1,19 +1,34 @@
 ---
-const technologies = [
-  "astro",
-  "vue",
-  "react",
-  "typeScript",
-  "tailwindcss",
-  "next",
-  "nodejs",
-  "HTML5",
-  "CSS3",
-  "javaScript",
-  "git",
-  "supabase",
-  "mysql",
-  "bash",
+interface Technology {
+  fileName: string;
+  displayName: string;
+}
+const technologies: Technology[] = [
+  { fileName: "angular", displayName: "Angular" },
+  { fileName: "astro", displayName: "Astro" },
+  { fileName: "bash", displayName: "Bash" },
+  { fileName: "cpanel", displayName: "cPanel" },
+  { fileName: "csharp", displayName: "C#" },
+  { fileName: "CSS3", displayName: "CSS3" },
+  { fileName: "docker", displayName: "Docker" },
+  { fileName: "dotnet", displayName: ".NET" },
+  { fileName: "expo", displayName: "Expo" },
+  { fileName: "git", displayName: "Git" },
+  { fileName: "HTML5", displayName: "HTML5" },
+  { fileName: "javaScript", displayName: "JavaScript" },
+  { fileName: "java", displayName: "Java" },
+  { fileName: "mysql", displayName: "MySQL" },
+  { fileName: "nestjs", displayName: "NestJS" },
+  { fileName: "next", displayName: "Next.js" },
+  { fileName: "nodejs", displayName: "Node.js" },
+  { fileName: "postgresql", displayName: "PostgreSQL" },
+  { fileName: "prisma", displayName: "Prisma" },
+  { fileName: "react", displayName: "React" },
+  { fileName: "spring", displayName: "Spring" },
+  { fileName: "tailwindcss", displayName: "Tailwind CSS" },
+  { fileName: "typeScript", displayName: "TypeScript" },
+  { fileName: "ubuntu", displayName: "Ubuntu" },
+  { fileName: "wordpress", displayName: "WordPress" },
 ];
 ---
 
@@ -32,15 +47,15 @@ const technologies = [
       [...technologies, ...technologies, ...technologies].map((tech) => (
         <div class="flex items-center gap-2 group transition-all duration-300">
           <img
-            src={`/svg/${tech}.svg`}
-            alt={tech}
+            src={`/svg/${tech.fileName}.svg`}
+            alt={tech.displayName}
             class="h-7 w-auto object-contain transition-transform group-hover:scale-110 opacity-60"
             width="30"
             height="30"
             loading="lazy"
           />
           <span class="text-lg font-medium text-[var(--white-icon)]">
-            {tech.charAt(0).toUpperCase() + tech.slice(1)}
+            {tech.displayName}
           </span>
         </div>
       ))
