@@ -1,0 +1,54 @@
+---
+// Experience.astro
+interface ExperienceItem {
+  date: string;
+  title: string;
+  company: string;
+  description: string;
+  skills: string[];
+}
+
+const experiences: ExperienceItem[] = [
+  {
+    date: "2022 - Present",
+    title: "Lead Full-Stack Developer",
+    company: "CODETEG",
+    description: "Led full-stack development and server infrastructure, delivering robust solutions while processes.",
+    skills: [".NET", "React", "NestJS", "WHM/CPanel", "Oracle DB"]
+  },
+];
+---
+
+<section
+  id="experience"
+  class="py-12 border-t border-[#ffffff10] text-[var(--white)]"
+>
+  <div class="max-w-5xl mx-auto">
+    <h2 class="text-lg text-[var(--sec)] mb-2 shiny-sec">My journey</h2>
+    <h3 class="text-4xl md:text-5xl font-medium mb-8">Experience</h3>
+    
+    <!-- Timeline Component -->
+    <div class="timeline-container relative">
+      <!-- Line vertical -->
+      <div class="absolute left-0 md:left-1/2 w-0.5 h-full bg-[var(--sec)] transform -translate-x-1/2"></div>
+      
+      {experiences.map((experience, index) => (
+        <div class={`timeline-item relative mb-16 md:mb-24 ${index === experiences.length - 1 ? "mb-0" : ""}`}>
+          <div class={`timeline-item-content pb-4 max-md:ml-6 ${index % 2 === 0 ? "md:w-1/2 md:pr-8 md:text-right md:mr-auto" : "md:w-1/2 md:pl-8 md:ml-auto"}`}>
+            <span class="block text-[var(--sec)] text-sm mb-1">{experience.date}</span>
+            <h4 class="text-xl font-bold mb-2">{experience.title}</h4>
+            <h5 class="text-lg text-[var(--sec)] mb-3">{experience.company}</h5>
+            <p class="text-[#ffffffcc]">{experience.description}</p>
+            <div class={`flex flex-wrap gap-2 mt-4 ${index % 2 === 0 ? "md:justify-end" : ""}`}>
+              {experience.skills.map((skill) => (
+                <span class="px-3 py-1 bg-[#ffffff10] rounded-full text-sm">{skill}</span>
+              ))}
+            </div>
+          </div>
+          <!-- Circle marker -->
+          <div class="absolute left-0 md:left-1/2 top-0 w-4 h-4 bg-[var(--sec)] rounded-full transform -translate-x-1/2 "></div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
