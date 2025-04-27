@@ -42,7 +42,7 @@ const SkillsList = () => {
 
   const skills = {
     "Backend Development": [
-      "RESTful APIs with Java (Spring Boot) and TypeScript (NestJS)",
+      "RESTful APIs with Java (Spring Boot), .NET and TypeScript (NestJS)",
       "Asynchronous processing and background tasks",
       "Authentication systems, role-based access, and secure data handling",
       "Database design and integration with PostgreSQL, MySQL, and Oracle"
