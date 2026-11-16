@@ -43,7 +43,7 @@ const iconos = [
           {t.hero.verCasos}
         </a>
         {perfil.cv && (
-          <a href={perfil.cv} class="boton" download>
+          <a href={`${perfil.cv}-${idioma}.pdf`} class="boton" download>
             {t.hero.cv}
           </a>
         )}

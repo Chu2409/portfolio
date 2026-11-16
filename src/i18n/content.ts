@@ -7,8 +7,8 @@ export const perfil = {
   github: "https://github.com/Chu2409",
   linkedin: "https://www.linkedin.com/in/chu-er/",
   formulario: "https://formspree.io/f/xqaqzlzz",
-  // Ruta del PDF dentro de /public cuando el CV esté listo, p. ej. "/cv-daniel-zhu.pdf".
-  cv: "/cv-daniel-zhu.pdf" as string | null,
+  // Ruta del PDF dentro de /public cuando el CV esté listo, se completa con el idioma (/cv-daniel-zhu-es.pdf). Se genera en multi-repo/cv.
+  cv: "/cv-daniel-zhu" as string | null,
 };
 
 interface Area {
@@ -164,7 +164,7 @@ const es: Contenido = {
     nota: "Algunos de los proyectos que he construido para clientes.",
     casos: [
       {
-        rotulo: "Automatización · Cumplimiento",
+        rotulo: "Fideval · Automatización",
         titulo: "Motor de debida diligencia",
         descripcion:
           "Recibe una identificación, consulta en paralelo una decena de portales públicos y varios sistemas internos, guarda la evidencia de cada fuente, califica el riesgo y genera el expediente en Word y Excel. Incluye API, worker con cola, conectores con navegador automatizado y pantallas.",
@@ -173,7 +173,7 @@ const es: Contenido = {
         stack: ["Python", "FastAPI", "Playwright", "Docker", "Oracle", "Angular"],
       },
       {
-        rotulo: "Integración · Contabilidad",
+        rotulo: "Fideval · Contabilidad",
         titulo: "Registro automático de facturas",
         descripcion:
           "Una tarea lee las facturas de proveedores, las valida contra la autoridad tributaria y propone el registro contable. Tras la revisión en la web, se registra y se emite el comprobante electrónico firmado.",
@@ -181,7 +181,7 @@ const es: Contenido = {
         stack: [".NET 10", "PL/SQL", "Angular", "Firma electrónica"],
       },
       {
-        rotulo: "Integración con terceros",
+        rotulo: "Fideval · Integración bancaria",
         titulo: "Conciliación con cinco bancos",
         descripcion:
           "Una API que consulta los movimientos en los servicios de cinco bancos y los cruza con las transacciones esperadas, con una lógica de cruce común y reglas propias de cada banco.",
@@ -189,11 +189,11 @@ const es: Contenido = {
         stack: [".NET", "APIs REST", "Oracle"],
       },
       {
-        rotulo: "Aplicación interna",
-        titulo: "Administración de personal y buzones para una firma de auditoría",
+        rotulo: "Deloitte · Aplicación interna",
+        titulo: "Administración de personal y buzones",
         descripcion:
           "Gestión de empleados, buzones de correo, grupos y oficinas, con roles y permisos, bitácoras y notificaciones por correo. Procesos programados sincronizan empleados y oficinas y verifican vigencias.",
-        impacto: "Reemplazó al sistema anterior de la firma, con todos sus datos migrados.",
+        impacto: "Reemplazó al sistema anterior, con todos sus datos migrados.",
         stack: [".NET 8", "ASP.NET Core MVC", "EF Core", "SQL Server", "TypeScript"],
       },
     ],
@@ -205,7 +205,7 @@ const es: Contenido = {
         periodo: "2024 — Actualidad",
         cargo: "Desarrollador full-stack",
         empresa: "Proconty",
-        resumen: "Desarrollo para clientes de servicios financieros y auditoría.",
+        resumen: "Desarrollo para clientes como Fideval, Deloitte y FEMSA.",
         logros: [
           "Procesos completos, desde el levantamiento con el área de negocio hasta la puesta en producción.",
           "Backends en .NET, frontends en Angular y lógica en Oracle, según lo que pida cada proyecto.",
@@ -217,7 +217,7 @@ const es: Contenido = {
         cargo: "Desarrollador full-stack",
         empresa: "AudiSupport",
         resumen:
-          "Servicios de desarrollo por proyecto. Actualmente, a cargo de un motor de debida diligencia.",
+          "Servicios de desarrollo por proyecto. Actualmente, a cargo de un motor de debida diligencia para Fideval.",
         logros: [
           "Diseño y desarrollo completo del motor: API, worker con cola y conectores con navegador automatizado.",
           "Backend en Python con FastAPI, SQLAlchemy y Playwright, desplegado en contenedores Docker.",
@@ -230,7 +230,7 @@ const es: Contenido = {
         empresa: "CODETEG",
         resumen: "Desarrollo para clientes de la empresa y operación de sus servidores.",
         logros: [
-          "Desarrollador principal de una aplicación interna en .NET 8 para una firma global de auditoría.",
+          "Desarrollador principal de una aplicación interna en .NET 8 para Deloitte.",
           "APIs y mantenimiento de aplicaciones empresariales sobre Oracle.",
           "Administración de servidores y hosting con WHM/cPanel para entidades públicas.",
           "Diseño y desarrollo de sitios en WordPress.",
@@ -250,7 +250,7 @@ const es: Contenido = {
       {
         id: "bazar",
         titulo: "Punto de venta para un bazar",
-        estado: "En desarrollo",
+        estado: "En producción",
         descripcion:
           "Ventas, inventario, cotizaciones, cajas y sucursales, con facturación electrónica, impresión directa de comprobantes y actualización en tiempo real.",
         stack: ["NestJS", "Prisma", "PostgreSQL", "BullMQ", "Next.js", "Docker"],
@@ -374,7 +374,7 @@ const en: Contenido = {
     nota: "Some of the projects I've built for clients.",
     casos: [
       {
-        rotulo: "Automation · Compliance",
+        rotulo: "Fideval · Automation",
         titulo: "Due diligence engine",
         descripcion:
           "Takes an ID number, queries about ten public portals and several internal systems in parallel, stores the evidence from each source, scores risk and generates the case file in Word and Excel. It includes an API, a queue worker, browser-automation connectors and screens.",
@@ -383,7 +383,7 @@ const en: Contenido = {
         stack: ["Python", "FastAPI", "Playwright", "Docker", "Oracle", "Angular"],
       },
       {
-        rotulo: "Integration · Accounting",
+        rotulo: "Fideval · Accounting",
         titulo: "Automatic invoice entry",
         descripcion:
           "A job reads supplier invoices, validates them against the tax authority and proposes the accounting entry. After review on the web, it is posted and the signed electronic receipt is issued.",
@@ -391,7 +391,7 @@ const en: Contenido = {
         stack: [".NET 10", "PL/SQL", "Angular", "Digital signature"],
       },
       {
-        rotulo: "Third-party integration",
+        rotulo: "Fideval · Bank integration",
         titulo: "Reconciliation with five banks",
         descripcion:
           "An API that pulls movements from the services of five banks and matches them with the expected transactions, with shared matching logic and bank-specific rules.",
@@ -399,11 +399,11 @@ const en: Contenido = {
         stack: [".NET", "REST APIs", "Oracle"],
       },
       {
-        rotulo: "Internal application",
-        titulo: "Staff and mailbox administration for an audit firm",
+        rotulo: "Deloitte · Internal application",
+        titulo: "Staff and mailbox administration",
         descripcion:
           "Management of employees, mailboxes, groups and offices, with roles and permissions, audit logs and email notifications. Scheduled jobs sync employees and offices and check expirations.",
-        impacto: "It replaced the firm's previous system, with all its data migrated.",
+        impacto: "It replaced the previous system, with all its data migrated.",
         stack: [".NET 8", "ASP.NET Core MVC", "EF Core", "SQL Server", "TypeScript"],
       },
     ],
@@ -415,7 +415,7 @@ const en: Contenido = {
         periodo: "2024 — Present",
         cargo: "Full-stack developer",
         empresa: "Proconty",
-        resumen: "Development for financial services and audit clients.",
+        resumen: "Development for clients such as Fideval, Deloitte and FEMSA.",
         logros: [
           "Complete processes, from requirements with the business area to the production release.",
           "Backends in .NET, frontends in Angular and logic in Oracle, depending on what each project needs.",
@@ -426,7 +426,8 @@ const en: Contenido = {
         periodo: "2026 — Present",
         cargo: "Full-stack developer",
         empresa: "AudiSupport",
-        resumen: "Project-based development services. Currently in charge of a due diligence engine.",
+        resumen:
+          "Project-based development services. Currently in charge of a due diligence engine for Fideval.",
         logros: [
           "Full design and development of the engine: API, queue worker and browser-automation connectors.",
           "Python backend with FastAPI, SQLAlchemy and Playwright, deployed in Docker containers.",
@@ -439,7 +440,7 @@ const en: Contenido = {
         empresa: "CODETEG",
         resumen: "Development for the company's clients and operation of its servers.",
         logros: [
-          "Lead developer of an internal .NET 8 application for a global audit firm.",
+          "Lead developer of an internal .NET 8 application for Deloitte.",
           "APIs and maintenance of enterprise applications on Oracle.",
           "Server and hosting administration with WHM/cPanel for public institutions.",
           "Design and development of WordPress sites.",
@@ -459,7 +460,7 @@ const en: Contenido = {
       {
         id: "bazar",
         titulo: "Point of sale for a retail shop",
-        estado: "In development",
+        estado: "In production",
         descripcion:
           "Sales, inventory, quotations, cash registers and branches, with electronic invoicing, direct receipt printing and real-time updates.",
         stack: ["NestJS", "Prisma", "PostgreSQL", "BullMQ", "Next.js", "Docker"],
