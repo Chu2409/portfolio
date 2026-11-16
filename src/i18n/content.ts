@@ -274,12 +274,11 @@ const es: Contenido = {
       {
         id: "dl",
         titulo: "D&L American Outlet",
-        estado: "E-commerce · en línea",
+        estado: "E-commerce",
         descripcion:
           "Tienda en línea con catálogo, filtros y carrito, más un panel de administración para productos, tallas, colores y pedidos.",
         stack: ["Next.js", "TypeScript", "Prisma", "PostgreSQL", "NextAuth"],
         codigo: "https://github.com/Chu2409/e-commerce",
-        demo: "https://dl-american-outlet.vercel.app",
       },
     ],
   },
@@ -484,12 +483,11 @@ const en: Contenido = {
       {
         id: "dl",
         titulo: "D&L American Outlet",
-        estado: "E-commerce · live",
+        estado: "E-commerce",
         descripcion:
           "Online store with catalog, filters and cart, plus an admin panel for products, sizes, colors and orders.",
         stack: ["Next.js", "TypeScript", "Prisma", "PostgreSQL", "NextAuth"],
         codigo: "https://github.com/Chu2409/e-commerce",
-        demo: "https://dl-american-outlet.vercel.app",
       },
     ],
   },
