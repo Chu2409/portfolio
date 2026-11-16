@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://chuer.netlify.app/sitemap-index.xml

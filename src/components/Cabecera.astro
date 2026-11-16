@@ -1,0 +1,119 @@
+---
+import Icono from "./Icono.astro";
+import { contenido, perfil, rutaDe, type Idioma } from "@/i18n/content";
+
+interface Props {
+  idioma: Idioma;
+}
+
+const { idioma } = Astro.props;
+const t = contenido[idioma];
+const otro: Idioma = idioma === "es" ? "en" : "es";
+
+const enlaces = [
+  { href: "#trabajo", texto: t.nav.trabajo },
+  { href: "#experiencia", texto: t.nav.experiencia },
+  { href: "#proyectos", texto: t.nav.proyectos },
+  { href: "#contacto", texto: t.nav.contacto },
+];
+---
+
+<header class="border-line bg-paper/90 sticky top-0 z-40 border-b backdrop-blur">
+  <div class="contenedor flex h-16 items-center justify-between gap-4">
+    <a href={rutaDe(idioma)} class="text-lg font-bold tracking-tight">
+      {perfil.nombre}
+    </a>
+
+    <nav aria-label={t.controles.menu} class="hidden md:block">
+      <ul class="flex gap-7 text-[0.95rem]">
+        {enlaces.map((enlace) => (
+          <li>
+            <a href={enlace.href} class="text-muted hover:text-ink transition-colors">
+              {enlace.texto}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <div class="flex items-center gap-1">
+      <a
+        href={rutaDe(otro)}
+        hreflang={otro}
+        lang={otro}
+        aria-label={t.controles.idioma}
+        class="hover:text-accent flex size-11 items-center justify-center text-sm font-semibold"
+      >
+        {t.controles.otroIdioma}
+      </a>
+      <button
+        type="button"
+        id="cambiar-tema"
+        aria-label={t.controles.tema}
+        class="hover:text-accent flex size-11 cursor-pointer items-center justify-center"
+      >
+        <Icono nombre="tema" />
+      </button>
+
+      <details id="menu-movil" class="md:hidden">
+        <summary
+          aria-label={t.controles.menu}
+          class="hover:text-accent flex size-11 cursor-pointer list-none items-center justify-center [&::-webkit-details-marker]:hidden"
+        >
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            class="size-6"
+            aria-hidden="true"
+          >
+            <path d="M4 7h16M4 12h16M4 17h16"></path>
+          </svg>
+        </summary>
+        <nav
+          aria-label={t.controles.menu}
+          class="border-line bg-paper absolute inset-x-0 top-16 border-b shadow-lg"
+        >
+          <ul class="contenedor grid py-2">
+            {enlaces.map((enlace) => (
+              <li>
+                <a
+                  href={enlace.href}
+                  class="hover:text-accent flex min-h-12 items-center text-lg font-medium"
+                >
+                  {enlace.texto}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </details>
+    </div>
+  </div>
+</header>
+
+<script>
+  const boton = document.getElementById("cambiar-tema");
+  const raiz = document.documentElement;
+
+  boton?.addEventListener("click", () => {
+    const oscuroAhora =
+      raiz.dataset.theme === "dark" ||
+      (!raiz.dataset.theme && window.matchMedia("(prefers-color-scheme: dark)").matches);
+    const nuevo = oscuroAhora ? "light" : "dark";
+    raiz.dataset.theme = nuevo;
+    try {
+      localStorage.setItem("tema", nuevo);
+    } catch {}
+  });
+
+  const menu = document.getElementById("menu-movil") as HTMLDetailsElement | null;
+  menu?.addEventListener("click", (evento) => {
+    if ((evento.target as Element).closest("a")) menu.open = false;
+  });
+  document.addEventListener("keydown", (evento) => {
+    if (evento.key === "Escape" && menu?.open) menu.open = false;
+  });
+</script>

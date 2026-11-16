@@ -1,26 +1,21 @@
 // @ts-check
 import { defineConfig } from "astro/config";
-import tailwind from "@astrojs/tailwind";
+import sitemap from "@astrojs/sitemap";
+import tailwindcss from "@tailwindcss/vite";
 
-import react from "@astrojs/react";
-
-// https://astro.build/config
 export default defineConfig({
-  integrations: [tailwind(), react()],
+  site: "https://chuer.netlify.app",
+  compressHTML: true,
+  i18n: {
+    defaultLocale: "es",
+    locales: ["es", "en"],
+  },
+  integrations: [
+    sitemap({
+      i18n: { defaultLocale: "es", locales: { es: "es-EC", en: "en-US" } },
+    }),
+  ],
   vite: {
-    resolve: {
-      alias: {
-        "@": "/src",
-        "@components": "/src/components",
-      },
-    },
-  },
-  output: "static",
-  build: {
-    inlineStylesheets: "auto",
-  },
-  server: {
-    host: true,
-    port: 4321,
+    plugins: [tailwindcss()],
   },
 });

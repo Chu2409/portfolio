@@ -1,0 +1,123 @@
+---
+import Icono from "./Icono.astro";
+import { contenido, perfil, type Idioma } from "@/i18n/content";
+
+interface Props {
+  idioma: Idioma;
+}
+
+const t = contenido[Astro.props.idioma].contacto;
+const campo =
+  "border-line bg-surface focus:border-accent mt-1.5 w-full rounded-lg border px-3.5 py-2.5 focus:outline-2 focus:outline-offset-0 focus:outline-(--accent)";
+---
+
+<section id="contacto" class="seccion">
+  <div class="contenedor grid gap-x-16 gap-y-10 lg:grid-cols-2">
+    <div>
+      <h2 class="titulo-seccion">{t.titulo}</h2>
+      <p class="text-muted mt-4 max-w-[30rem] text-lg">{t.texto}</p>
+
+      <ul class="text-muted mt-6 grid gap-1">
+        <li>
+          <a href={`mailto:${perfil.correo}`} class="hover:text-accent flex min-h-11 items-center gap-2.5">
+            <Icono nombre="correo" />
+            {perfil.correo}
+          </a>
+        </li>
+        <li>
+          <a
+            href={perfil.linkedin}
+            class="hover:text-accent flex min-h-11 items-center gap-2.5"
+            rel="me noopener"
+          >
+            <Icono nombre="linkedin" /> LinkedIn
+          </a>
+        </li>
+        <li>
+          <a
+            href={perfil.github}
+            class="hover:text-accent flex min-h-11 items-center gap-2.5"
+            rel="me noopener"
+          >
+            <Icono nombre="github" /> GitHub
+          </a>
+        </li>
+      </ul>
+      <p class="text-muted mt-6">{t.ubicacion}</p>
+    </div>
+
+    <div>
+      <form id="formulario-contacto" action={perfil.formulario} method="POST" class="grid gap-5">
+        <label class="block font-semibold">
+          {t.nombre}
+          <input type="text" name="from_name" autocomplete="name" required class={`${campo} font-normal`} />
+        </label>
+        <label class="block font-semibold">
+          {t.correo}
+          <input
+            type="email"
+            name="reply_to"
+            autocomplete="email"
+            spellcheck="false"
+            required
+            class={`${campo} font-normal`}
+          />
+        </label>
+        <label class="block font-semibold">
+          {t.mensaje}
+          <textarea name="message" rows="6" required class={`${campo} resize-y font-normal`}></textarea>
+        </label>
+        <div>
+          <button type="submit" class="boton boton-primario cursor-pointer" data-enviando={t.enviando}>
+            {t.enviar}
+          </button>
+        </div>
+      </form>
+
+      <p id="contacto-enviado" class="border-accent hidden rounded-md border p-4 font-semibold" tabindex="-1">
+        {t.enviado}
+      </p>
+      <p id="contacto-error" class="mt-4 hidden" role="alert">
+        {t.error}
+        <a href={`mailto:${perfil.correo}`} class="enlace">
+          {perfil.correo}
+        </a>
+      </p>
+    </div>
+  </div>
+</section>
+
+<script>
+  const formulario = document.getElementById("formulario-contacto") as HTMLFormElement | null;
+  const enviado = document.getElementById("contacto-enviado");
+  const error = document.getElementById("contacto-error");
+
+  formulario?.addEventListener("submit", async (evento) => {
+    evento.preventDefault();
+    const boton = formulario.querySelector("button");
+    const textoOriginal = boton?.textContent ?? "";
+    if (boton) {
+      boton.disabled = true;
+      boton.textContent = boton.dataset.enviando ?? textoOriginal;
+    }
+    error?.classList.add("hidden");
+
+    try {
+      const respuesta = await fetch(formulario.action, {
+        method: "POST",
+        body: new FormData(formulario),
+        headers: { Accept: "application/json" },
+      });
+      if (!respuesta.ok) throw new Error(String(respuesta.status));
+      formulario.classList.add("hidden");
+      enviado?.classList.remove("hidden");
+      enviado?.focus();
+    } catch {
+      error?.classList.remove("hidden");
+      if (boton) {
+        boton.disabled = false;
+        boton.textContent = textoOriginal;
+      }
+    }
+  });
+</script>

@@ -1,0 +1,40 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Cabecera from "./Cabecera.astro";
+import Inicio from "./Inicio.astro";
+import Trabajo from "./Trabajo.astro";
+import Experiencia from "./Experiencia.astro";
+import Proyectos from "./Proyectos.astro";
+import Contacto from "./Contacto.astro";
+import Efectos from "./Efectos.astro";
+import { contenido, perfil, type Idioma } from "@/i18n/content";
+
+interface Props {
+  idioma: Idioma;
+}
+
+const { idioma } = Astro.props;
+const t = contenido[idioma];
+---
+
+<Layout idioma={idioma}>
+  <Cabecera idioma={idioma} />
+  <main id="contenido" class="overflow-x-clip">
+    <Inicio idioma={idioma} />
+    <Trabajo idioma={idioma} />
+    <Experiencia idioma={idioma} />
+    <Proyectos idioma={idioma} />
+    <Contacto idioma={idioma} />
+  </main>
+  <footer class="border-line border-t py-8">
+    <div class="contenedor text-muted flex flex-wrap justify-between gap-x-8 gap-y-2 text-[0.95rem]">
+      <p>
+        © {new Date().getFullYear()} {perfil.nombre}
+      </p>
+      <a href="https://github.com/Chu2409/portfolio" class="enlace" rel="noopener">
+        {t.pie.codigo}
+      </a>
+    </div>
+  </footer>
+  <Efectos />
+</Layout>

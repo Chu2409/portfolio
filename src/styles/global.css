@@ -1,0 +1,262 @@
+@import "tailwindcss";
+
+@theme inline {
+  --font-sans: "Space Grotesk Variable", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  --color-paper: var(--paper);
+  --color-surface: var(--surface);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-accent: var(--accent);
+  --color-on-accent: var(--on-accent);
+  --color-chip: var(--chip);
+}
+
+:root {
+  color-scheme: light;
+  --paper: #f5f3fb;
+  --surface: #ffffff;
+  --ink: #17151f;
+  --muted: #575466;
+  --line: #e4e0f0;
+  --line-strong: #c9c2de;
+  --accent: #6d4aff;
+  --on-accent: #ffffff;
+  --chip: #f0edfb;
+  --available: #1f9d57;
+  --glow: 22%;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --paper: #0c0b10;
+    --surface: #15131d;
+    --ink: #ebe8f3;
+    --muted: #a6a1b8;
+    --line: #231f30;
+    --line-strong: #3a3450;
+    --accent: #a476ff;
+    --on-accent: #120b24;
+    --chip: #211d2e;
+    --available: #7be3a1;
+    --glow: 32%;
+  }
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --paper: #0c0b10;
+  --surface: #15131d;
+  --ink: #ebe8f3;
+  --muted: #a6a1b8;
+  --line: #231f30;
+  --line-strong: #3a3450;
+  --accent: #a476ff;
+  --on-accent: #120b24;
+  --chip: #211d2e;
+  --available: #7be3a1;
+  --glow: 32%;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-size: 1.0625rem;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    line-height: 1.1;
+    text-wrap: balance;
+  }
+
+  p,
+  li {
+    text-wrap: pretty;
+  }
+
+  ::selection {
+    background: var(--accent);
+    color: var(--on-accent);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  .contenedor {
+    width: 100%;
+    max-width: 70rem;
+    margin-inline: auto;
+    padding-inline: 1.25rem;
+  }
+
+  @media (min-width: 48rem) {
+    .contenedor {
+      padding-inline: 2rem;
+    }
+  }
+
+  .seccion {
+    padding-block: 3rem;
+  }
+
+  @media (min-width: 48rem) {
+    .seccion {
+      padding-block: 5.5rem;
+    }
+  }
+
+  .titulo-seccion {
+    font-size: clamp(1.75rem, 3.6vw, 2.25rem);
+  }
+
+  .tarjeta {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 1rem;
+    padding: 1.75rem;
+  }
+
+  .rotulo {
+    color: var(--accent);
+    font-size: 0.875rem;
+    font-weight: 500;
+  }
+
+  .enlace {
+    color: var(--accent);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+
+  .boton {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 2.75rem;
+    padding: 0.65rem 1.25rem;
+    border: 1px solid var(--line-strong);
+    border-radius: 0.625rem;
+    font-weight: 500;
+    line-height: 1.2;
+    transition:
+      background-color 0.15s,
+      color 0.15s,
+      border-color 0.15s;
+  }
+
+  .boton:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  .boton-primario {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: var(--on-accent);
+  }
+
+  .boton-primario:hover {
+    background: var(--ink);
+    border-color: var(--ink);
+    color: var(--paper);
+  }
+
+  .etiqueta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.2rem 0.75rem;
+    border-radius: 999px;
+    background: var(--chip);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    line-height: 1.5;
+    white-space: nowrap;
+  }
+}
+
+/* Borde que se ilumina donde está el cursor. */
+.tarjeta {
+  position: relative;
+  transition: translate 0.25s ease;
+}
+
+.tarjeta::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: 1px;
+  border-radius: inherit;
+  background: radial-gradient(16rem circle at var(--x, 50%) var(--y, 0%), var(--accent), transparent 70%);
+  mask:
+    linear-gradient(#000 0 0) content-box exclude,
+    linear-gradient(#000 0 0);
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  pointer-events: none;
+}
+
+@media (hover: hover) {
+  .tarjeta:hover {
+    translate: 0 -3px;
+  }
+
+  .tarjeta:hover::after {
+    opacity: 1;
+  }
+}
+
+/* Entrada al hacer scroll; solo si hay JavaScript y el visitante no pidió menos movimiento. */
+@media (prefers-reduced-motion: no-preference) {
+  html.js :is(.tarjeta, .hito):not(.visible) {
+    opacity: 0;
+    translate: 0 1rem;
+  }
+
+  html.js :is(.tarjeta, .hito) {
+    transition:
+      opacity 0.6s ease var(--retraso, 0s),
+      translate 0.6s ease var(--retraso, 0s);
+  }
+
+  html.js .tarjeta.visible:hover {
+    transition: translate 0.25s ease;
+  }
+}

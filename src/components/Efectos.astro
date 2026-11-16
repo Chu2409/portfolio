@@ -1,0 +1,37 @@
+<script>
+  const elementos = document.querySelectorAll<HTMLElement>(".tarjeta, .hito");
+
+  const observador = new IntersectionObserver(
+    (entradas) => {
+      const nuevas = entradas.filter((entrada) => entrada.isIntersecting);
+      nuevas.forEach((entrada, i) => {
+        const el = entrada.target as HTMLElement;
+        el.style.setProperty("--retraso", `${i * 70}ms`);
+        el.classList.add("visible");
+        observador.unobserve(el);
+      });
+    },
+    { rootMargin: "0px 0px -8% 0px" },
+  );
+  elementos.forEach((el) => observador.observe(el));
+
+  if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+    document.addEventListener("pointermove", (evento) => {
+      const tarjeta = (evento.target as Element | null)?.closest<HTMLElement>(".tarjeta");
+      if (!tarjeta) return;
+      const caja = tarjeta.getBoundingClientRect();
+      tarjeta.style.setProperty("--x", `${evento.clientX - caja.left}px`);
+      tarjeta.style.setProperty("--y", `${evento.clientY - caja.top}px`);
+    });
+
+    const inicio = document.querySelector<HTMLElement>(".inicio");
+    const resplandor = inicio?.querySelector<HTMLElement>(".resplandor");
+    inicio?.addEventListener("pointermove", (evento) => {
+      const caja = inicio.getBoundingClientRect();
+      const dx = (evento.clientX - caja.left) / caja.width - 0.75;
+      const dy = (evento.clientY - caja.top) / caja.height - 0.2;
+      resplandor?.style.setProperty("--dx", `${dx * 14}rem`);
+      resplandor?.style.setProperty("--dy", `${dy * 10}rem`);
+    });
+  }
+</script>

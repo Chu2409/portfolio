@@ -1,0 +1,164 @@
+---
+import type { Idioma } from "@/i18n/content";
+
+interface Props {
+  idioma: Idioma;
+}
+
+type Tipo = "clave" | "nombre" | "texto" | "valor" | "signo";
+type Trozo = [Tipo, string];
+
+const c = (texto: string): Trozo => ["texto", `"${texto}"`];
+const s = (texto: string): Trozo => ["signo", texto];
+const lista = (...valores: string[]): Trozo[] => [
+  s("["),
+  ...valores.flatMap((valor, i) => (i ? [s(", "), c(valor)] : [c(valor)])),
+  s("],"),
+];
+const campo = (nombre: string, ...resto: Trozo[]): Trozo[] => [
+  s("  "),
+  ["nombre", nombre],
+  s(": "),
+  ...resto,
+];
+
+const es = Astro.props.idioma === "es";
+
+const lineas: Trozo[][] = [
+  [["clave", "const"], s(" "), ["nombre", "daniel"], s(" = {")],
+  campo(es ? "rol" : "role", c(es ? "Ingeniero de software" : "Software engineer"), s(",")),
+  campo(es ? "enfoque" : "focus", c("full-stack"), s(",")),
+  campo("backend", ...lista(".NET", "Python", "NestJS")),
+  campo("frontend", ...lista("Angular", "React")),
+  campo(es ? "datos" : "data", ...lista("Oracle", "PostgreSQL")),
+  campo(es ? "disponible" : "available", ["valor", "true"], s(",")),
+  [s("};")],
+];
+
+const VELOCIDAD = 0.028;
+let espera = 0.5;
+const filas = lineas.map((trozos) => {
+  const largo = trozos.reduce((total, [, texto]) => total + texto.length, 0);
+  const fila = { trozos, largo, espera, duracion: largo * VELOCIDAD };
+  espera += fila.duracion + 0.12;
+  return fila;
+});
+---
+
+<div class="editor" aria-hidden="true">
+  <div class="barra">
+    <span></span>
+    <span></span>
+    <span></span>
+    <p>daniel.ts</p>
+  </div>
+  <pre><code>{filas.map((fila, i) => (
+      <span class="fila"><span class="num">{i + 1}</span><span
+          class="linea"
+          style={`--n:${fila.largo};--espera:${fila.espera.toFixed(2)}s;--duracion:${fila.duracion.toFixed(2)}s`}
+        >{fila.trozos.map(([tipo, texto]) => <span class={tipo}>{texto}</span>)}</span></span>
+    ))}</code></pre>
+</div>
+
+<style>
+  .editor {
+    border: 1px solid var(--line-strong);
+    border-radius: 0.875rem;
+    background: color-mix(in srgb, var(--surface) 88%, transparent);
+    box-shadow: 0 1.5rem 4rem -1.5rem color-mix(in srgb, var(--accent) 45%, transparent);
+    backdrop-filter: blur(8px);
+    overflow: hidden;
+  }
+
+  .barra {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .barra span {
+    width: 0.7rem;
+    height: 0.7rem;
+    border-radius: 50%;
+    background: var(--line-strong);
+  }
+
+  .barra p {
+    margin-left: 0.6rem;
+    color: var(--muted);
+    font-size: 0.8125rem;
+  }
+
+  pre {
+    padding: 1.1rem 1rem 1.3rem;
+    overflow-x: auto;
+    font-family: ui-monospace, "Cascadia Code", "SF Mono", Menlo, Consolas, monospace;
+    font-size: clamp(0.72rem, 2.9vw, 0.9rem);
+    line-height: 1.85;
+  }
+
+  .fila {
+    display: flex;
+  }
+
+  .num {
+    flex: none;
+    width: 1.6rem;
+    margin-right: 0.9rem;
+    color: var(--line-strong);
+    text-align: right;
+    user-select: none;
+  }
+
+  .linea {
+    display: inline-block;
+    width: calc(var(--n) * 1ch);
+    overflow: hidden;
+    white-space: pre;
+    animation: escribir var(--duracion) steps(var(--n)) var(--espera) backwards;
+  }
+
+  .fila:last-child .linea {
+    width: calc(var(--n) * 1ch + 1ch);
+  }
+
+  .fila:last-child .linea::after {
+    content: "▍";
+    color: var(--accent);
+    animation: parpadear 1s steps(2) infinite;
+  }
+
+  @keyframes escribir {
+    from {
+      width: 0;
+    }
+  }
+
+  @keyframes parpadear {
+    50% {
+      opacity: 0;
+    }
+  }
+
+  .clave {
+    color: var(--accent);
+  }
+
+  .nombre {
+    color: var(--ink);
+  }
+
+  .texto {
+    color: var(--available);
+  }
+
+  .valor {
+    color: var(--accent);
+  }
+
+  .signo {
+    color: var(--muted);
+  }
+</style>

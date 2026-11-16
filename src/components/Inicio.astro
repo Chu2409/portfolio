@@ -1,0 +1,176 @@
+---
+import Editor from "./Editor.astro";
+import Icono from "./Icono.astro";
+import Tec from "./Tec.astro";
+import { contenido, perfil, type Idioma } from "@/i18n/content";
+
+interface Props {
+  idioma: Idioma;
+}
+
+const { idioma } = Astro.props;
+const t = contenido[idioma];
+
+// Un icono por área, en el mismo orden que `areas.lista`.
+const iconos = [
+  '<rect x="2" y="3" width="20" height="7" rx="2"/><rect x="2" y="14" width="20" height="7" rx="2"/><path d="M6 6.5h.01M6 17.5h.01"/>',
+  '<rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/>',
+  '<ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14a9 3 0 0 0 18 0V5"/><path d="M3 12a9 3 0 0 0 18 0"/>',
+  '<path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/>',
+  '<path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/>',
+  '<path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M12 7v5l4 2"/>',
+];
+---
+
+<section class="inicio relative">
+  <div class="resplandor" aria-hidden="true"></div>
+
+  <div class="contenedor grid items-center gap-x-12 gap-y-12 pt-16 pb-12 md:pt-24 md:pb-16 lg:grid-cols-[1.1fr_0.9fr]">
+    <div>
+      <p class="border-line-strong inline-flex items-center gap-2.5 rounded-full border px-3.5 py-1.5 text-sm">
+        <span class="disponible size-2 rounded-full" aria-hidden="true"></span>
+        {t.hero.disponibilidad}
+      </p>
+
+      <h1 class="mt-6 max-w-[13ch] text-[clamp(2.6rem,6.4vw,4.6rem)] leading-none">{t.hero.titulo}</h1>
+      <p class="text-muted mt-6 max-w-[34rem] text-lg md:text-[1.2rem]">{t.hero.presentacion}</p>
+
+      <div class="mt-8 flex flex-wrap items-center gap-3">
+        <a href="#contacto" class="boton boton-primario">
+          {t.hero.escribir}
+        </a>
+        <a href="#trabajo" class="boton">
+          {t.hero.verCasos}
+        </a>
+        {perfil.cv && (
+          <a href={perfil.cv} class="boton" download>
+            {t.hero.cv}
+          </a>
+        )}
+      </div>
+
+      <ul class="text-muted mt-8 flex flex-wrap gap-x-6 gap-y-1">
+        <li>
+          <a
+            href={perfil.github}
+            class="hover:text-accent flex min-h-11 items-center gap-2"
+            rel="me noopener"
+          >
+            <Icono nombre="github" /> GitHub
+          </a>
+        </li>
+        <li>
+          <a
+            href={perfil.linkedin}
+            class="hover:text-accent flex min-h-11 items-center gap-2"
+            rel="me noopener"
+          >
+            <Icono nombre="linkedin" /> LinkedIn
+          </a>
+        </li>
+        <li>
+          <a href={`mailto:${perfil.correo}`} class="hover:text-accent flex min-h-11 items-center gap-2">
+            <Icono nombre="correo" />
+            {perfil.correo}
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <Editor idioma={idioma} />
+  </div>
+
+  <div class="contenedor pb-8">
+    <h2 class="titulo-seccion">{t.areas.titulo}</h2>
+    <div class="mt-6 grid gap-4 md:grid-cols-2 lg:grid-cols-12">
+      {t.areas.lista.map((area, i) => {
+        const grande = i < 2;
+        return (
+          <article class:list={["tarjeta", grande ? "lg:col-span-6 lg:p-9" : "lg:col-span-3"]}>
+            <span class:list={["icono-area", grande && "icono-grande"]}>
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.75"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+                set:html={iconos[i]}
+              />
+            </span>
+            <p class="rotulo mt-5">{area.rotulo}</p>
+            <h3 class:list={["mt-1.5", grande ? "text-2xl lg:text-[1.75rem]" : "text-xl"]}>{area.titulo}</h3>
+            <p class:list={["text-muted mt-2", grande ? "max-w-[30rem]" : "text-[0.97rem]"]}>
+              {area.detalle}
+            </p>
+            <ul class="mt-4 flex flex-wrap gap-2">
+              {area.tecnologias.map((tecnologia) => (
+                <Tec nombre={tecnologia} />
+              ))}
+            </ul>
+          </article>
+        );
+      })}
+    </div>
+  </div>
+</section>
+
+<style>
+  .resplandor {
+    position: absolute;
+    top: -22rem;
+    right: -12rem;
+    z-index: -1;
+    width: 48rem;
+    height: 48rem;
+    border-radius: 50%;
+    background: radial-gradient(
+      circle,
+      color-mix(in srgb, var(--accent) var(--glow), transparent),
+      transparent 65%
+    );
+    pointer-events: none;
+    translate: var(--dx, 0) var(--dy, 0);
+    transition: translate 0.6s ease-out;
+  }
+
+  .disponible {
+    background: var(--available);
+    box-shadow: 0 0 0 0 var(--available);
+    animation: latir 2.4s ease-out infinite;
+  }
+
+  @keyframes latir {
+    to {
+      box-shadow: 0 0 0 0.6rem transparent;
+    }
+  }
+
+  .icono-area {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: 0.75rem;
+    background: color-mix(in srgb, var(--accent) 14%, transparent);
+    color: var(--accent);
+  }
+
+  .icono-area svg {
+    width: 1.4rem;
+    height: 1.4rem;
+  }
+
+  .icono-grande {
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 1rem;
+  }
+
+  .icono-grande svg {
+    width: 1.75rem;
+    height: 1.75rem;
+  }
+</style>

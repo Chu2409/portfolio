@@ -1,0 +1,57 @@
+---
+import * as simpleIcons from "simple-icons";
+
+interface Props {
+  nombre: string;
+}
+
+const { nombre } = Astro.props;
+
+// Tecnologías sin logo en simple-icons (Oracle, SQL Server, Playwright…) salen solo con texto.
+const logos: Record<string, string> = {
+  "C# · .NET": "siDotnet",
+  ".NET": "siDotnet",
+  ".NET 8": "siDotnet",
+  ".NET 10": "siDotnet",
+  "ASP.NET Core MVC": "siDotnet",
+  "Python · FastAPI": "siPython",
+  Python: "siPython",
+  FastAPI: "siFastapi",
+  NestJS: "siNestjs",
+  Java: "siOpenjdk",
+  Angular: "siAngular",
+  NgRx: "siNgrx",
+  PrimeNG: "siPrimeng",
+  React: "siReact",
+  "Next.js": "siNextdotjs",
+  TypeScript: "siTypescript",
+  "Tailwind CSS": "siTailwindcss",
+  PostgreSQL: "siPostgresql",
+  MySQL: "siMysql",
+  Redis: "siRedis",
+  Prisma: "siPrisma",
+  OpenAI: "siOpenai",
+  Vue: "siVuedotjs",
+  Docker: "siDocker",
+  Linux: "siLinux",
+  "WHM/cPanel": "siCpanel",
+  Git: "siGit",
+  WordPress: "siWordpress",
+  "Agentes con MCP": "siModelcontextprotocol",
+  "Agents with MCP": "siModelcontextprotocol",
+};
+
+const clave = logos[nombre];
+const logo = clave
+  ? (simpleIcons as unknown as Record<string, { path: string } | undefined>)[clave]
+  : undefined;
+---
+
+<li class="etiqueta">
+  {logo && (
+    <svg viewBox="0 0 24 24" fill="currentColor" class="size-3.5 shrink-0" aria-hidden="true">
+      <path d={logo.path} />
+    </svg>
+  )}
+  {nombre}
+</li>

@@ -1,0 +1,82 @@
+---
+import { Image } from "astro:assets";
+import Icono from "./Icono.astro";
+import capturaDl from "@/assets/dl-american-outlet.webp";
+import capturaBazar from "@/assets/bazar.webp";
+import capturaNous from "@/assets/nous.webp";
+import Tec from "./Tec.astro";
+import { contenido, type Idioma, type Proyecto } from "@/i18n/content";
+
+interface Props {
+  idioma: Idioma;
+}
+
+const t = contenido[Astro.props.idioma].proyectos;
+
+const capturas: Partial<Record<Proyecto["id"], ImageMetadata>> = {
+  dl: capturaDl,
+  bazar: capturaBazar,
+  nous: capturaNous,
+};
+---
+
+<section id="proyectos" class="seccion">
+  <div class="contenedor">
+    <h2 class="titulo-seccion">{t.titulo}</h2>
+    <p class="text-muted mt-2">{t.nota}</p>
+
+    <div class="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+      {t.lista.map((proyecto) => {
+        const captura = capturas[proyecto.id];
+        return (
+          <article class="tarjeta flex flex-col overflow-hidden p-0">
+            {captura ? (
+              <Image
+                src={captura}
+                alt={`${t.capturaDe} ${proyecto.titulo}`}
+                widths={[400, 720, 1000]}
+                sizes="(min-width: 64rem) 22rem, (min-width: 48rem) 50vw, 100vw"
+                class="aspect-[4/3] w-full object-cover object-top"
+              />
+            ) : (
+              <div class="bg-accent text-on-accent flex aspect-[4/3] flex-col justify-between p-6">
+                <p class="text-sm font-medium">{t.modulos}</p>
+                <ul class="grid gap-0.5 text-[1.45rem] leading-tight font-bold tracking-tight">
+                  {proyecto.modulos?.map((modulo) => (
+                    <li>{modulo}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            <div class="flex grow flex-col p-6">
+              <p class="rotulo">{proyecto.estado}</p>
+              <h3 class="mt-1.5 text-xl">{proyecto.titulo}</h3>
+              <p class="text-muted mt-2 text-[0.97rem]">{proyecto.descripcion}</p>
+              <ul class="mt-4 mb-5 flex flex-wrap gap-2">
+                {proyecto.stack.map((tecnologia) => (
+                  <Tec nombre={tecnologia} />
+                ))}
+              </ul>
+              <div class="mt-auto flex flex-wrap items-center gap-2">
+                {proyecto.demo && (
+                  <a href={proyecto.demo} class="boton" rel="noopener">
+                    {t.demo} <Icono nombre="externo" class="size-4" />
+                  </a>
+                )}
+                {proyecto.codigo && (
+                  <a href={proyecto.codigo} class="boton" rel="noopener">
+                    <Icono nombre="github" class="size-4" /> {t.codigo}
+                  </a>
+                )}
+                {!proyecto.codigo && !proyecto.demo && (
+                  <p class="text-muted flex min-h-11 items-center text-[0.95rem]">{t.privado}</p>
+                )}
+              </div>
+            </div>
+          </article>
+        );
+      })}
+    </div>
+  </div>
+</section>

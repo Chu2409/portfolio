@@ -1,0 +1,81 @@
+---
+import { contenido, type Idioma } from "@/i18n/content";
+
+interface Props {
+  idioma: Idioma;
+}
+
+const t = contenido[Astro.props.idioma].experiencia;
+---
+
+<section id="experiencia" class="seccion">
+  <div class="contenedor">
+    <h2 class="titulo-seccion">{t.titulo}</h2>
+
+    <ol class="linea-tiempo mt-10">
+      {t.puestos.map((puesto) => (
+        <li class="hito">
+          <p class="text-accent text-sm font-medium">{puesto.periodo}</p>
+          <h3 class="mt-1 text-2xl">{puesto.cargo}</h3>
+          <p class="mt-1 text-lg font-medium">{puesto.empresa}</p>
+          <p class="text-muted mt-3 max-w-[44rem]">{puesto.resumen}</p>
+          <ul class="text-muted mt-3 grid max-w-[44rem] list-disc gap-1.5 pl-5">
+            {puesto.logros.map((logro) => (
+              <li>{logro}</li>
+            ))}
+          </ul>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>
+
+<style>
+  .linea-tiempo {
+    position: relative;
+    display: grid;
+    gap: 3rem;
+    padding-left: 2rem;
+  }
+
+  .linea-tiempo::before {
+    content: "";
+    position: absolute;
+    left: 0.4rem;
+    top: 0.5rem;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(var(--accent), var(--line) 85%, transparent);
+  }
+
+  .hito {
+    position: relative;
+  }
+
+  .hito::before {
+    content: "";
+    position: absolute;
+    left: -2rem;
+    top: 0.3rem;
+    width: 0.95rem;
+    height: 0.95rem;
+    border: 2px solid var(--accent);
+    border-radius: 50%;
+    background: var(--paper);
+  }
+
+  .hito:first-child::before {
+    background: var(--accent);
+    box-shadow: 0 0 0 0.3rem color-mix(in srgb, var(--accent) 25%, transparent);
+  }
+
+  @media (min-width: 64rem) {
+    .linea-tiempo {
+      padding-left: 3rem;
+    }
+
+    .hito::before {
+      left: -3rem;
+    }
+  }
+</style>

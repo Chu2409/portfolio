@@ -1,0 +1,130 @@
+---
+import Tec from "./Tec.astro";
+import { contenido, type Idioma } from "@/i18n/content";
+
+interface Props {
+  idioma: Idioma;
+}
+
+const t = contenido[Astro.props.idioma].trabajo;
+const [principal, ...resto] = t.casos;
+---
+
+<section id="trabajo" class="seccion">
+  <div class="contenedor">
+    <h2 class="titulo-seccion">{t.titulo}</h2>
+    <p class="text-muted mt-2">{t.nota}</p>
+
+    {principal && (
+      <article class="tarjeta destacado mt-8 grid gap-x-12 gap-y-8 md:p-10 lg:grid-cols-[1.15fr_0.85fr]">
+        <div class="flex flex-col">
+          <p class="rotulo">{principal.rotulo}</p>
+          <h3 class="mt-2 text-3xl md:text-4xl">{principal.titulo}</h3>
+          <p class="text-muted mt-4">{principal.descripcion}</p>
+          <p class="impacto mt-5">{principal.impacto}</p>
+          <ul class="mt-6 flex flex-wrap gap-2">
+            {principal.stack.map((tecnologia) => (
+              <Tec nombre={tecnologia} />
+            ))}
+          </ul>
+        </div>
+
+        <ol class="flujo">
+          {principal.pasos?.map((paso, i) => (
+            <li>
+              <span class="numero">{i + 1}</span>
+              {paso}
+            </li>
+          ))}
+        </ol>
+      </article>
+    )}
+
+    <div class="mt-4 grid gap-4 lg:grid-cols-3">
+      {resto.map((caso) => (
+        <article class="tarjeta flex flex-col">
+          <p class="rotulo">{caso.rotulo}</p>
+          <h3 class="mt-1.5 text-xl">{caso.titulo}</h3>
+          <p class="text-muted mt-3 text-[0.97rem]">{caso.descripcion}</p>
+          <p class="impacto mt-4 mb-5 text-[0.97rem]">{caso.impacto}</p>
+          <ul class="mt-auto flex flex-wrap gap-2">
+            {caso.stack.map((tecnologia) => (
+              <Tec nombre={tecnologia} />
+            ))}
+          </ul>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .destacado {
+    background:
+      radial-gradient(
+        40rem circle at 100% 0%,
+        color-mix(in srgb, var(--accent) 14%, transparent),
+        transparent 60%
+      ),
+      var(--surface);
+  }
+
+  .impacto {
+    padding-left: 0.9rem;
+    border-left: 3px solid var(--accent);
+    font-weight: 500;
+  }
+
+  /* Los pasos sí son una secuencia: por eso van numerados y unidos por una línea. */
+  .flujo {
+    position: relative;
+    display: grid;
+    align-content: center;
+    gap: 0.9rem;
+  }
+
+  .flujo::before {
+    content: "";
+    position: absolute;
+    left: 1.95rem;
+    top: 1.5rem;
+    bottom: 1.5rem;
+    width: 2px;
+    background: var(--line-strong);
+  }
+
+  .flujo li {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    padding: 0.8rem 1rem;
+    border: 1px solid var(--line);
+    border-radius: 0.75rem;
+    background: var(--paper);
+    font-weight: 500;
+  }
+
+  .flujo li:last-child {
+    border-color: var(--accent);
+  }
+
+  .numero {
+    display: inline-flex;
+    flex: none;
+    align-items: center;
+    justify-content: center;
+    width: 1.9rem;
+    height: 1.9rem;
+    border-radius: 50%;
+    background: color-mix(in srgb, var(--accent) 16%, var(--surface));
+    color: var(--accent);
+    font-size: 0.875rem;
+    font-weight: 700;
+  }
+
+  .flujo li:last-child .numero {
+    background: var(--accent);
+    color: var(--on-accent);
+  }
+</style>
