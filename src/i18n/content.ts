@@ -94,7 +94,7 @@ const es: Contenido = {
   meta: {
     titulo: "Daniel Zhu · Ingeniero de software full-stack",
     descripcion:
-      "Ingeniero de software full-stack en Ecuador. Aplicaciones web, APIs y automatizaciones con .NET, Python, NestJS, Angular y React, desde la base de datos hasta la interfaz.",
+      "Ingeniero de software full-stack. Aplicaciones web, APIs y automatizaciones para empresas como Fideval, Deloitte y FEMSA, con .NET, Python, NestJS, Angular y React.",
     cargo: "Ingeniero de software full-stack",
   },
   nav: {
@@ -114,7 +114,7 @@ const es: Contenido = {
     disponibilidad: "Disponible para nuevos proyectos",
     titulo: "Desarrollo software de punta a punta.",
     presentacion:
-      "Soy Daniel Zhu, ingeniero de software full-stack en Ecuador. Diseño y construyo aplicaciones web, APIs y automatizaciones, desde la base de datos hasta la interfaz.",
+      "Soy Daniel Zhu, ingeniero de software full-stack. Diseño y construyo aplicaciones web, APIs, integraciones y automatizaciones que reemplazan el trabajo manual, desde la base de datos hasta la interfaz.",
     escribir: "Escríbeme",
     verCasos: "Ver mi trabajo",
     cv: "Descargar CV",
@@ -162,7 +162,7 @@ const es: Contenido = {
   },
   trabajo: {
     titulo: "Trabajo destacado",
-    nota: "Sistemas construidos para Fideval y Deloitte.",
+    nota: "Sistemas construidos para Fideval y Deloitte. También he levantado requerimientos con FEMSA, Banco ProCredit y ARGOS.",
     casos: [
       {
         rotulo: "Fideval · Automatización",
@@ -198,7 +198,7 @@ const es: Contenido = {
         stack: [".NET 8", "Angular", "PL/SQL", "Oracle Forms"],
       },
       {
-        rotulo: "Deloitte · SABE",
+        rotulo: "Deloitte · Administración de personal",
         titulo: "Administración de personal y buzones",
         descripcion:
           "Gestión de empleados, buzones de correo, grupos y oficinas para Latinoamérica, con roles y permisos, bitácoras y notificaciones por correo. Procesos programados sincronizan empleados y oficinas y verifican vigencias.",
@@ -295,7 +295,7 @@ const es: Contenido = {
   contacto: {
     titulo: "Hablemos",
     texto: "Busco nuevos proyectos y oportunidades. Cuéntame qué necesitas y te respondo por correo.",
-    ubicacion: "Ambato, Ecuador · trabajo remoto",
+    ubicacion: "Ambato, Ecuador",
     nombre: "Nombre",
     correo: "Correo",
     mensaje: "Mensaje",
@@ -313,7 +313,7 @@ const en: Contenido = {
   meta: {
     titulo: "Daniel Zhu · Full-stack software engineer",
     descripcion:
-      "Full-stack software engineer based in Ecuador. Web applications, APIs and automation with .NET, Python, NestJS, Angular and React, from the database to the interface.",
+      "Full-stack software engineer. Web applications, APIs and automation for companies such as Fideval, Deloitte and FEMSA, with .NET, Python, NestJS, Angular and React.",
     cargo: "Full-stack software engineer",
   },
   nav: {
@@ -333,7 +333,7 @@ const en: Contenido = {
     disponibilidad: "Available for new projects",
     titulo: "I build software end to end.",
     presentacion:
-      "I'm Daniel Zhu, a full-stack software engineer in Ecuador. I design and build web applications, APIs and automation, from the database to the interface.",
+      "I'm Daniel Zhu, a full-stack software engineer. I design and build web applications, APIs, integrations and automation that replace manual work, from the database to the interface.",
     escribir: "Get in touch",
     verCasos: "See my work",
     cv: "Download CV",
@@ -381,7 +381,7 @@ const en: Contenido = {
   },
   trabajo: {
     titulo: "Selected work",
-    nota: "Systems built for Fideval and Deloitte.",
+    nota: "Systems built for Fideval and Deloitte. I have also gathered requirements with FEMSA, Banco ProCredit and ARGOS.",
     casos: [
       {
         rotulo: "Fideval · Automation",
@@ -417,7 +417,7 @@ const en: Contenido = {
         stack: [".NET 8", "Angular", "PL/SQL", "Oracle Forms"],
       },
       {
-        rotulo: "Deloitte · SABE",
+        rotulo: "Deloitte · Staff administration",
         titulo: "Staff and mailbox administration",
         descripcion:
           "Management of employees, mailboxes, groups and offices across Latin America, with roles and permissions, audit logs and email notifications. Scheduled jobs sync employees and offices and check expirations.",
@@ -514,7 +514,7 @@ const en: Contenido = {
   contacto: {
     titulo: "Let's talk",
     texto: "I'm looking for new projects and opportunities. Tell me what you need and I'll reply by email.",
-    ubicacion: "Ambato, Ecuador · remote work",
+    ubicacion: "Ambato, Ecuador",
     nombre: "Name",
     correo: "Email",
     mensaje: "Message",
