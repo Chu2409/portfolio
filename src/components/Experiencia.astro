@@ -17,7 +17,10 @@ const t = contenido[Astro.props.idioma].experiencia;
         <li class="hito">
           <p class="text-accent text-sm font-medium">{puesto.periodo}</p>
           <h3 class="mt-1 text-2xl">{puesto.cargo}</h3>
-          <p class="mt-1 text-lg font-medium">{puesto.empresa}</p>
+          <p class="mt-1 text-lg">
+            <span class="font-medium">{puesto.empresa}</span>
+            <span class="text-muted text-base"> · {puesto.modalidad}</span>
+          </p>
           <p class="text-muted mt-3 max-w-[44rem]">{puesto.resumen}</p>
           <ul class="text-muted mt-3 grid max-w-[44rem] list-disc gap-1.5 pl-5">
             {puesto.logros.map((logro) => (

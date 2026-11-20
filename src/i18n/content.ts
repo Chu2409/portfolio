@@ -31,6 +31,7 @@ interface Puesto {
   periodo: string;
   cargo: string;
   empresa: string;
+  modalidad: string;
   resumen: string;
   logros: string[];
 }
@@ -161,7 +162,7 @@ const es: Contenido = {
   },
   trabajo: {
     titulo: "Trabajo destacado",
-    nota: "Algunos de los proyectos que he construido para clientes.",
+    nota: "Sistemas construidos para Fideval y Deloitte.",
     casos: [
       {
         rotulo: "Fideval · Automatización",
@@ -189,10 +190,18 @@ const es: Contenido = {
         stack: [".NET", "APIs REST", "Oracle"],
       },
       {
-        rotulo: "Deloitte · Aplicación interna",
+        rotulo: "Fideval · Autogestión",
+        titulo: "Actualización de datos para fideicomisos",
+        descripcion:
+          "Las personas naturales y jurídicas de fideicomisos verifican y actualizan sus propios datos desde un enlace, en un formulario por pestañas. La aplicación existía solo para fondos de inversión.",
+        impacto: "Los clientes de fideicomisos actualizan sus datos sin pasar por la fiduciaria.",
+        stack: [".NET 8", "Angular", "PL/SQL", "Oracle Forms"],
+      },
+      {
+        rotulo: "Deloitte · SABE",
         titulo: "Administración de personal y buzones",
         descripcion:
-          "Gestión de empleados, buzones de correo, grupos y oficinas, con roles y permisos, bitácoras y notificaciones por correo. Procesos programados sincronizan empleados y oficinas y verifican vigencias.",
+          "Gestión de empleados, buzones de correo, grupos y oficinas para Latinoamérica, con roles y permisos, bitácoras y notificaciones por correo. Procesos programados sincronizan empleados y oficinas y verifican vigencias.",
         impacto: "Reemplazó al sistema anterior, con todos sus datos migrados.",
         stack: [".NET 8", "ASP.NET Core MVC", "EF Core", "SQL Server", "TypeScript"],
       },
@@ -202,38 +211,39 @@ const es: Contenido = {
     titulo: "Experiencia",
     puestos: [
       {
-        periodo: "2024 — Actualidad",
+        periodo: "nov. 2024 — Actualidad",
         cargo: "Desarrollador full-stack",
         empresa: "Proconty",
-        resumen: "Desarrollo para clientes como Fideval, Deloitte y FEMSA.",
+        modalidad: "Remoto",
+        resumen: "Desarrollo para Fideval y Deloitte, y levantamiento de requerimientos con FEMSA, Banco ProCredit y ARGOS.",
         logros: [
-          "Procesos completos, desde el levantamiento con el área de negocio hasta la puesta en producción.",
-          "Backends en .NET, frontends en Angular y lógica en Oracle, según lo que pida cada proyecto.",
-          "Documentación técnica, planes de prueba y entregas coordinadas con infraestructura y base de datos.",
+          "Para Fideval: registro automático de facturas, conciliación con cinco bancos y archivos de pago de tesorería, de punta a punta.",
+          "Para Deloitte: SABE, la aplicación de administración de personal y buzones para Latinoamérica.",
+          "Levantamiento de requerimientos e historias de usuario con las áreas de negocio de cada cliente.",
+          "Backends en .NET, frontends en Angular y lógica en Oracle, con documentación, planes de prueba y entregas coordinadas con infraestructura.",
         ],
       },
       {
-        periodo: "2026 — Actualidad",
+        periodo: "jun. 2026 — Actualidad",
         cargo: "Desarrollador full-stack",
         empresa: "AudiSupport",
-        resumen:
-          "Servicios de desarrollo por proyecto. Actualmente, a cargo de un motor de debida diligencia para Fideval.",
+        modalidad: "Remoto, por proyecto",
+        resumen: "Desarrollo por proyecto para Fideval.",
         logros: [
-          "Diseño y desarrollo completo del motor: API, worker con cola y conectores con navegador automatizado.",
-          "Backend en Python con FastAPI, SQLAlchemy y Playwright, desplegado en contenedores Docker.",
-          "Pruebas unitarias, de integración y de contrato contra las fuentes externas.",
+          "Motor de debida diligencia: diseño y desarrollo completo de la API, el worker con cola y los conectores con navegador automatizado, en Python con FastAPI, SQLAlchemy y Playwright sobre Docker.",
+          "Autogestión de datos de personas: extensión a fideicomisos, para personas naturales y jurídicas, de la aplicación que existía para fondos (.NET 8, Angular, PL/SQL y Oracle Forms).",
         ],
       },
       {
-        periodo: "2024 — 2025",
+        periodo: "nov. 2024 — feb. 2026",
         cargo: "Desarrollador full-stack e infraestructura",
         empresa: "CODETEG",
+        modalidad: "Presencial en Ambato, tercerizado para Proconty",
         resumen: "Desarrollo para clientes de la empresa y operación de sus servidores.",
         logros: [
-          "Desarrollador principal de una aplicación interna en .NET 8 para Deloitte.",
-          "APIs y mantenimiento de aplicaciones empresariales sobre Oracle.",
-          "Administración de servidores y hosting con WHM/cPanel para entidades públicas.",
-          "Diseño y desarrollo de sitios en WordPress.",
+          "Administración de servidores VPS con aplicaciones en Docker y de 20 a 30 clientes en WHM/cPanel, entre ellos entidades públicas.",
+          "Pipelines de CI/CD en Azure, migraciones de servidores, respaldos automáticos y certificados SSL.",
+          "Diseño y desarrollo de sitios en WordPress, y funcionalidades con React y NestJS.",
         ],
       },
     ],
@@ -250,7 +260,7 @@ const es: Contenido = {
       {
         id: "bazar",
         titulo: "Punto de venta para un bazar",
-        estado: "En producción",
+        estado: "Ventas e inventario",
         descripcion:
           "Ventas, inventario, cotizaciones, cajas y sucursales, con facturación electrónica, impresión directa de comprobantes y actualización en tiempo real.",
         stack: ["NestJS", "Prisma", "PostgreSQL", "BullMQ", "Next.js", "Docker"],
@@ -260,8 +270,8 @@ const es: Contenido = {
         titulo: "NousAI",
         estado: "Plataforma educativa con IA",
         descripcion:
-          "Los docentes generan lecciones, resúmenes y cuestionarios con modelos de lenguaje; los estudiantes conversan con un asistente que responde sobre el contenido del curso mediante búsqueda semántica, y reciben retroalimentación automática.",
-        stack: ["NestJS", "Prisma", "PostgreSQL", "pgvector", "BullMQ", "OpenAI", "Vue"],
+          "La usan más de 300 estudiantes y docentes de la Universidad Técnica de Ambato. Los docentes generan lecciones, resúmenes y cuestionarios con modelos de lenguaje; los estudiantes conversan con un asistente que responde sobre el contenido del curso mediante búsqueda semántica.",
+        stack: ["NestJS", "Prisma", "PostgreSQL", "pgvector", "BullMQ", "Vercel AI SDK", "Vue"],
         modulos: [
           "Lecciones generadas",
           "Chat con el curso",
@@ -371,7 +381,7 @@ const en: Contenido = {
   },
   trabajo: {
     titulo: "Selected work",
-    nota: "Some of the projects I've built for clients.",
+    nota: "Systems built for Fideval and Deloitte.",
     casos: [
       {
         rotulo: "Fideval · Automation",
@@ -399,10 +409,18 @@ const en: Contenido = {
         stack: [".NET", "REST APIs", "Oracle"],
       },
       {
-        rotulo: "Deloitte · Internal application",
+        rotulo: "Fideval · Self-service",
+        titulo: "Data updates for trusts",
+        descripcion:
+          "Individuals and companies with trusts verify and update their own data from a link, in a tabbed form. The application previously existed only for investment funds.",
+        impacto: "Trust clients update their data without going through the trust company.",
+        stack: [".NET 8", "Angular", "PL/SQL", "Oracle Forms"],
+      },
+      {
+        rotulo: "Deloitte · SABE",
         titulo: "Staff and mailbox administration",
         descripcion:
-          "Management of employees, mailboxes, groups and offices, with roles and permissions, audit logs and email notifications. Scheduled jobs sync employees and offices and check expirations.",
+          "Management of employees, mailboxes, groups and offices across Latin America, with roles and permissions, audit logs and email notifications. Scheduled jobs sync employees and offices and check expirations.",
         impacto: "It replaced the previous system, with all its data migrated.",
         stack: [".NET 8", "ASP.NET Core MVC", "EF Core", "SQL Server", "TypeScript"],
       },
@@ -412,38 +430,39 @@ const en: Contenido = {
     titulo: "Experience",
     puestos: [
       {
-        periodo: "2024 — Present",
+        periodo: "Nov 2024 — Present",
         cargo: "Full-stack developer",
         empresa: "Proconty",
-        resumen: "Development for clients such as Fideval, Deloitte and FEMSA.",
+        modalidad: "Remote",
+        resumen: "Development for Fideval and Deloitte, and requirements gathering with FEMSA, Banco ProCredit and ARGOS.",
         logros: [
-          "Complete processes, from requirements with the business area to the production release.",
-          "Backends in .NET, frontends in Angular and logic in Oracle, depending on what each project needs.",
-          "Technical documentation, test plans and releases coordinated with infrastructure and database teams.",
+          "For Fideval: automatic invoice entry, reconciliation with five banks and treasury payment files, end to end.",
+          "For Deloitte: SABE, the staff and mailbox administration application for Latin America.",
+          "Requirements gathering and user stories with each client's business areas.",
+          "Backends in .NET, frontends in Angular and logic in Oracle, with documentation, test plans and releases coordinated with infrastructure.",
         ],
       },
       {
-        periodo: "2026 — Present",
+        periodo: "Jun 2026 — Present",
         cargo: "Full-stack developer",
         empresa: "AudiSupport",
-        resumen:
-          "Project-based development services. Currently in charge of a due diligence engine for Fideval.",
+        modalidad: "Remote, project-based",
+        resumen: "Project-based development for Fideval.",
         logros: [
-          "Full design and development of the engine: API, queue worker and browser-automation connectors.",
-          "Python backend with FastAPI, SQLAlchemy and Playwright, deployed in Docker containers.",
-          "Unit, integration and contract tests against the external sources.",
+          "Due diligence engine: full design and development of the API, queue worker and browser-automation connectors, in Python with FastAPI, SQLAlchemy and Playwright on Docker.",
+          "Personal data self-service: extended the existing investment funds application to trusts, for individuals and companies (.NET 8, Angular, PL/SQL and Oracle Forms).",
         ],
       },
       {
-        periodo: "2024 — 2025",
+        periodo: "Nov 2024 — Feb 2026",
         cargo: "Full-stack developer and infrastructure",
         empresa: "CODETEG",
+        modalidad: "On-site in Ambato, outsourced to Proconty",
         resumen: "Development for the company's clients and operation of its servers.",
         logros: [
-          "Lead developer of an internal .NET 8 application for Deloitte.",
-          "APIs and maintenance of enterprise applications on Oracle.",
-          "Server and hosting administration with WHM/cPanel for public institutions.",
-          "Design and development of WordPress sites.",
+          "Managed VPS servers with Dockerized applications and 20 to 30 clients on WHM/cPanel, including public institutions.",
+          "CI/CD pipelines in Azure, server migrations, automated backups and SSL certificates.",
+          "Designed and built WordPress sites, and features with React and NestJS.",
         ],
       },
     ],
@@ -460,7 +479,7 @@ const en: Contenido = {
       {
         id: "bazar",
         titulo: "Point of sale for a retail shop",
-        estado: "In production",
+        estado: "Sales and inventory",
         descripcion:
           "Sales, inventory, quotations, cash registers and branches, with electronic invoicing, direct receipt printing and real-time updates.",
         stack: ["NestJS", "Prisma", "PostgreSQL", "BullMQ", "Next.js", "Docker"],
@@ -470,8 +489,8 @@ const en: Contenido = {
         titulo: "NousAI",
         estado: "AI-powered learning platform",
         descripcion:
-          "Teachers generate lessons, summaries and quizzes with language models; students chat with an assistant that answers about the course content through semantic search, and get automatic feedback.",
-        stack: ["NestJS", "Prisma", "PostgreSQL", "pgvector", "BullMQ", "OpenAI", "Vue"],
+          "Used by more than 300 students and teachers at Universidad Técnica de Ambato. Teachers generate lessons, summaries and quizzes with language models; students chat with an assistant that answers about the course content through semantic search.",
+        stack: ["NestJS", "Prisma", "PostgreSQL", "pgvector", "BullMQ", "Vercel AI SDK", "Vue"],
         modulos: [
           "Generated lessons",
           "Chat with the course",
